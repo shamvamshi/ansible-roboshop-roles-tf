@@ -1,0 +1,52 @@
+- name: disable default nginx
+  ansible.builtin.command: dnf module disable nginx -y  
+
+- name: enable nginx
+  ansible.builtin.command: dnf module enable nginx:1.24 -y
+
+- name: install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: enable and start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: remove html directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: create html directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: download the roboshop content
+  ansible.builtin.get_url:
+    url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+    dest: /tmp/frontend.zip
+
+- name: unzip frontend code
+  ansible.builtin.unarchive:
+    src: /tmp/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes  # You use it when the source file already exists on the remote machine, and you don't want Ansible to copy it from your local machine.
+
+- name: remove nginx default conf
+  ansible.builtin.file:
+    path: /etc/nginx/nginx.conf
+    state: absent
+    
+- name: copy roboshop nginx conf
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify:  # notify will check in what is mentioned in handlers, then it will trigger restart
+    - Restart nginx
+
+# - name: restart nginx
+  

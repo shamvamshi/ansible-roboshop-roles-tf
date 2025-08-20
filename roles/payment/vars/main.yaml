@@ -1,0 +1,5 @@
+CART_HOST: cart.shamrobos.site
+USER_HOST: user.shamrobos.site
+RABBITMQ_HOST: rabbitmq.shamrobos.site
+RABBITMQ_USER: roboshop
+RABBITMQ_PASSWORD: roboshop123
