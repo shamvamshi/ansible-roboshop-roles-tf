@@ -19,7 +19,7 @@
     state: present
 
 - name: check products loaded or not
-  ansible.builtin.command: mongosh --host mongodb.shamrobos.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  ansible.builtin.command: mongosh --host {{ MONGODB_HOST }} --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
 
 - name: print catalogue output
@@ -27,7 +27,7 @@
     msg: "{{ catalogue_output }}"
 
 - name: load products
-  ansible.builtin.shell: mongosh --host mongodb.shamrobos.site < /app/db/master-data.js # you have to use shell command because it consist of special characters like >
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} < /app/db/master-data.js # you have to use shell command because it consist of special characters like >
   when: catalogue_output.stdout | int < 0
   # ignore_errors: true
   # ignore_unreachable: true
