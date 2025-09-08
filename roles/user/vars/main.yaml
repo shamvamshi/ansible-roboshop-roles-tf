@@ -1,2 +1,2 @@
-REDIS_HOST: redis.shamrobos.site
-MONGODB_HOST: mongodb.shamrobos.site
+REDIS_HOST: redis-{{ env }}.shamrobos.site
+MONGODB_HOST: mongodb-{{ env }}.shamrobos.site

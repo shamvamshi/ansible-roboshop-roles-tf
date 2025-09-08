@@ -1,2 +1,2 @@
-CATALOGUE_HOST: catalogue.shamrobos.site
-REDIS_HOST: redis.shamrobos.site 
+CATALOGUE_HOST: catalogue.backend-{{ env }}.shamrobos.site
+REDIS_HOST: redis-{{ env }}.shamrobos.site 

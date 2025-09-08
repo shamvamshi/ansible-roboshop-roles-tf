@@ -1,5 +1,5 @@
-CART_HOST: cart.shamrobos.site
-USER_HOST: user.shamrobos.site
-RABBITMQ_HOST: rabbitmq.shamrobos.site
+CART_HOST: cart.backend-{{ env }}.shamrobos.site
+USER_HOST: user.backend-{{ env }}.shamrobos.site
+RABBITMQ_HOST: rabbitmq-{{ env }}.shamrobos.site
 RABBITMQ_USER: roboshop
 RABBITMQ_PASSWORD: roboshop123
